@@ -7,6 +7,33 @@ import { useEffect, useId, useState } from "react";
 type LinkItem = { label: string; href: string };
 type Diagram = { id: string; label: string; source: string };
 
+function applyErTextContrast(markup: string) {
+  if (typeof DOMParser === "undefined") return markup;
+  const document = new DOMParser().parseFromString(markup, "image/svg+xml");
+  const svg = document.documentElement;
+  const rows = svg.querySelectorAll("[class*='attributeBoxOdd'], [class*='attributeBoxEven']");
+  rows.forEach((row) => {
+    const className = row.getAttribute("class") ?? "";
+    const color = className.includes("attributeBoxOdd") ? "#111111" : "#F5F1EB";
+    const rect = row.tagName.toLowerCase() === "rect" ? row : row.querySelector("rect");
+    if (!rect) return;
+    const x = Number(rect.getAttribute("x") ?? 0);
+    const y = Number(rect.getAttribute("y") ?? 0);
+    const width = Number(rect.getAttribute("width") ?? 0);
+    const height = Number(rect.getAttribute("height") ?? 0);
+    const container = row.closest("g") ?? svg;
+    container.querySelectorAll("text").forEach((text) => {
+      const textX = Number(text.getAttribute("x") ?? 0);
+      const textY = Number(text.getAttribute("y") ?? 0);
+      if (textX >= x && textX <= x + width && textY >= y && textY <= y + height) {
+        text.style.fill = color;
+        text.style.color = color;
+      }
+    });
+  });
+  return svg.outerHTML;
+}
+
 function Diagram({ diagram, expanded = false }: { diagram: Diagram; expanded?: boolean }) {
   const generatedId = useId().replace(/:/g, "");
   const [svg, setSvg] = useState("");
@@ -14,7 +41,7 @@ function Diagram({ diagram, expanded = false }: { diagram: Diagram; expanded?: b
     let active = true;
     import("mermaid").then(async ({ default: mermaid }) => {
       mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: "base", themeVariables: { background: "#0B0C10", mainBkg: "#1B1B1E", primaryColor: "#1B1B1E", primaryTextColor: "#F3F0EA", primaryBorderColor: "#9C896B", lineColor: "#C8AE87", edgeLabelBackground: "#202024", secondaryColor: "#0B0C10", tertiaryColor: "#25252A", actorBkg: "#1B1B1E", actorBorder: "#9C896B", actorTextColor: "#F3F0EA", signalColor: "#C8AE87", signalTextColor: "#F3F0EA", labelBoxBkgColor: "#202024", labelTextColor: "#F3F0EA", entityBkg: "#202024", entityBorder: "#9C896B", attributeBorderColor: "#9C896B", relationshipLabelBackground: "#202024", relationshipLabelColor: "#F5F1EB", textColor: "#F5F1EB", fontFamily: "Arial, sans-serif", fontSize: "16px" } });
-      try { const result = await mermaid.render(`secondary-${diagram.id}-${generatedId}`, diagram.source); if (active) setSvg(result.svg); } catch { if (active) setSvg(`<pre>${diagram.source}</pre>`); }
+      try { const result = await mermaid.render(`secondary-${diagram.id}-${generatedId}`, diagram.source); if (active) setSvg(applyErTextContrast(result.svg)); } catch { if (active) setSvg(`<pre>${diagram.source}</pre>`); }
     });
     return () => { active = false; };
   }, [diagram.id, diagram.source, generatedId]);
