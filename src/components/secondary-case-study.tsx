@@ -11,24 +11,17 @@ function applyErTextContrast(markup: string) {
   if (typeof DOMParser === "undefined") return markup;
   const document = new DOMParser().parseFromString(markup, "image/svg+xml");
   const svg = document.documentElement;
-  const rows = svg.querySelectorAll("[class*='attributeBoxOdd'], [class*='attributeBoxEven']");
-  rows.forEach((row) => {
-    const className = row.getAttribute("class") ?? "";
-    const color = className.includes("attributeBoxOdd") ? "#111111" : "#F5F1EB";
-    const rect = row.tagName.toLowerCase() === "rect" ? row : row.querySelector("rect");
-    if (!rect) return;
-    const x = Number(rect.getAttribute("x") ?? 0);
-    const y = Number(rect.getAttribute("y") ?? 0);
-    const width = Number(rect.getAttribute("width") ?? 0);
-    const height = Number(rect.getAttribute("height") ?? 0);
-    const container = row.closest("g") ?? svg;
-    container.querySelectorAll("text").forEach((text) => {
-      const textX = Number(text.getAttribute("x") ?? 0);
-      const textY = Number(text.getAttribute("y") ?? 0);
-      if (textX >= x && textX <= x + width && textY >= y && textY <= y + height) {
-        text.style.fill = color;
-        text.style.color = color;
-      }
+  svg.querySelectorAll("g").forEach((entity) => {
+    if (!entity.querySelector(":scope > rect.entityBox, :scope > rect.er.entityBox")) return;
+    const rows = Array.from(entity.querySelectorAll("rect[class*='attributeBox']"));
+    const texts = Array.from(entity.querySelectorAll("text")).slice(-rows.length * 2);
+    rows.forEach((row, index) => {
+      const className = row.getAttribute("class") ?? "";
+      const color = className.includes("attributeBoxOdd") ? "#111111" : "#F5F1EB";
+      texts.slice(index * 2, index * 2 + 2).forEach((text) => {
+        text.style.setProperty("fill", color, "important");
+        text.style.setProperty("color", color, "important");
+      });
     });
   });
   return svg.outerHTML;
