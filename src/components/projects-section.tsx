@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -25,7 +24,7 @@ export function ProjectsSection() {
   return <section id="projects" className="projects-section section-shell" ref={sectionRef} aria-labelledby="projects-title">
     <div className="projects-intro"><p className="section-index">03 / SELECTED PROJECTS</p><h2 id="projects-title">Selected engineering work.</h2><p>A collection of projects exploring distributed systems, full-stack engineering, and AI-powered applications.</p></div>
     <div className="project-list">{projects.map((project, index) => { const details = homepageProjectDetails[project.slug as keyof typeof homepageProjectDetails]; return <article className="project-card" key={project.slug}>
-      <div className="project-content"><div className="project-heading-row"><p className="project-number">0{index + 1}</p><p className="project-category">{details.category}</p></div><h3>{project.name}</h3><p className="project-description">{details.description}</p><div className="project-footer"><p className="project-tech-label">Technologies Used</p><div className="project-tags">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><div className="project-actions"><Link className="text-link" href={`/projects/${project.slug}`}>View Case Study <ArrowUpRight size={15} aria-hidden="true" /></Link>{project.links.map((link) => <a className="project-link" href={link.href} target="_blank" rel="noreferrer" key={link.label}>{link.label === "Live Demo" ? "Live Website" : link.label} <ArrowUpRight size={14} aria-hidden="true" /></a>)}</div></div></div>
+      <div className="project-content"><div className="project-heading-row"><p className="project-number">0{index + 1}</p><p className="project-category">{details.category}</p></div><h3>{project.name}</h3><p className="project-description">{details.description}</p><div className="project-footer"><p className="project-tech-label">Technologies Used</p><div className="project-tags">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div><div className="project-actions"><Link className="text-link" href={`/projects/${project.slug}`}>View Case Study</Link>{project.links.map((link) => <a className="project-link" href={link.href} target="_blank" rel="noreferrer" key={link.label}>{link.label === "Live Demo" ? "Live Website" : link.label}</a>)}</div></div></div>
     </article>; })}</div>
   </section>;
 }
