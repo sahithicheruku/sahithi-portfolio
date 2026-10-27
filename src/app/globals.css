@@ -191,6 +191,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px s
 .pulseops-decision-grid h3, .pulseops-operations h3 { color: var(--champagne); font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; margin: 0 0 12px; text-transform: uppercase; }
 .pulseops-decision-grid p, .pulseops-operations p { color: var(--secondary); line-height: 1.75; margin: 0; }
 .pulseops-operations { border-top: 1px solid var(--border); display: grid; gap: 0 44px; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 960px; }
+.jobsync-verification-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1120px; }
 .pulseops-operations > div { border-bottom: 1px solid var(--border); padding: 24px 0; }
 .pulseops-final-links { border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 24px; margin: 96px 0 32px; padding-top: 28px; }
 .pulseops-final-links .detail-label { flex-basis: 100%; margin-bottom: -6px; }
