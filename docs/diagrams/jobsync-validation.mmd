@@ -1,0 +1,10 @@
+flowchart LR
+  request[Analysis request] --> input{Valid input and account ownership?}
+  input -->|No| reject[Return validation or authorization error]
+  input -->|Yes| provider[Call analysis provider]
+  provider --> result{Provider and model response valid?}
+  result -->|No| unavailable[Disclose unavailable analysis]
+  result -->|Yes| evidence[Validate evidence citations and output schema]
+  evidence -->|Invalid| invalid[Reject unsupported or malformed output]
+  evidence -->|Valid| persist[Persist analysis snapshot and content hashes]
+  persist --> dashboard[Display results]

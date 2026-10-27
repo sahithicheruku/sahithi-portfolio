@@ -1,0 +1,9 @@
+erDiagram
+  USER ||--o{ ITEM : owns
+  USER ||--o{ BORROW_REQUEST : submits
+  ITEM ||--o{ BORROW_REQUEST : receives
+  USER { string id string email UserRole role }
+  ITEM { string id string ownerId ItemStatus status string title }
+  BORROW_REQUEST { string id string itemId string requesterId BorrowRequestStatus status }
+  USER ||--o{ ACCOUNT : authenticates
+  USER ||--o{ SESSION : holds

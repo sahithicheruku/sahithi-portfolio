@@ -1,0 +1,14 @@
+flowchart LR
+  browser[Next.js React TypeScript UI] -->|Authenticated request| app[Next.js application and server actions]
+  app -->|Prisma queries| db[(PostgreSQL)]
+  app -->|HTTP analysis request| ml[Python FastAPI ML service]
+  ml --> extract[PDF text extraction and skill extraction]
+  extract --> spacy[spaCy processing]
+  extract --> embed[Sentence Transformers all-MiniLM-L6-v2]
+  embed --> score[Semantic similarity scoring]
+  score --> app
+  app -->|Structured provider request when configured| ai[OpenAI Responses API or Ollama]
+  ai --> app
+  app --> dashboard[Analysis and insights dashboard]
+  docker[Docker Compose] -. runs .-> app
+  docker -. runs .-> ml

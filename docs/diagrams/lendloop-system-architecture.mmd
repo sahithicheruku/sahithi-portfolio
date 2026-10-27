@@ -1,0 +1,8 @@
+flowchart LR
+  browser[Browser React UI] --> next[Next.js App Router]
+  next --> auth[NextAuth Google OAuth and session]
+  next --> actions[Server components and API actions]
+  actions --> guard[Session, ownership, and state checks]
+  guard --> prisma[Prisma ORM]
+  prisma --> db[(PostgreSQL)]
+  vercel[Vercel hosting] -. deploys .-> next

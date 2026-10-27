@@ -1,0 +1,24 @@
+flowchart LR
+  consume[Consumer processing failure]
+  retry[Kafka retry topic and backoff]
+  recovered[Successful retry]
+  exhausted[Retries exhausted]
+  dlt[Dead-letter topic]
+  handler[Dead-letter handler]
+  failure[Persist FAILED status, reason, and retry metadata]
+  eligible{Retry count below service limit?}
+  manual[POST /transactions/id/retry]
+  received[Return to RECEIVED]
+  publish[Republish TransactionCreatedEvent]
+  retained[Remain FAILED for operator review]
+  consume --> retry
+  retry --> recovered
+  retry --> exhausted
+  recovered --> complete[Continue normal processing]
+  exhausted --> dlt --> handler --> failure --> eligible
+  subgraph recovery[Manual recovery]
+    direction LR
+    manual[POST /transactions/id/retry] --> received[Return to RECEIVED] --> publish[Republish TransactionCreatedEvent]
+  end
+  eligible -->|Yes| manual
+  eligible -->|No| retained[Remain FAILED for operator review]

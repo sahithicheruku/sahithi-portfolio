@@ -1,0 +1,21 @@
+sequenceDiagram
+  participant UI as React frontend
+  participant API as Spring Boot API
+  participant R as Redis
+  participant DB as PostgreSQL
+  participant K as Kafka
+  participant C as Kafka consumer
+  UI->>API: Authenticated POST /api/v1/transactions
+  API->>API: JWT and Bean Validation
+  API->>R: Rate-limit and idempotency controls
+  R-->>API: Allow or existing transaction
+  API->>DB: Persist transaction as RECEIVED
+  API->>DB: Persist initial status history
+  API->>K: Publish TransactionCreatedEvent
+  API-->>UI: Return transaction response
+  K-->>C: Consume transaction.created
+  C->>DB: Persist VALIDATING
+  C->>DB: Persist PROCESSING
+  C->>DB: Persist COMPLETED
+  DB-->>UI: SSE status updates through API
+  C->>DB: Persist FAILED on validation failure

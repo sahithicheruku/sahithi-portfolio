@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant U as User
+  participant N as Next.js route
+  participant DB as PostgreSQL / Prisma
+  participant ML as FastAPI ML service
+  participant M as NLP models
+  U->>N: Select resume and job
+  N->>DB: Load account-owned context
+  N->>ML: Send resume or job text
+  ML->>M: Extract text, skills, and embeddings
+  M-->>ML: Evidence and similarity data
+  ML-->>N: Validated analysis response
+  N->>N: Compute evidence-based rubric scores
+  N->>DB: Persist analysis snapshot
+  N-->>U: Show match, ATS-style checks, gaps, and suggestions

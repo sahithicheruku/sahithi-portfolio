@@ -1,0 +1,10 @@
+flowchart TB
+  create[Owner creates item] --> available[Item AVAILABLE]
+  available --> request[Authenticated user submits request]
+  request --> requested[Item REQUESTED / request PENDING]
+  requested -->|Owner approves| borrowed[Item BORROWED / request APPROVED]
+  requested -->|Owner declines| available
+  requested -->|Requester cancels| available
+  borrowed -->|Owner or borrower returns| returned[Request RETURNED]
+  returned --> available
+  request -. cannot request own item .-> denied[403 authorization response]

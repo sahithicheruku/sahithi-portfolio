@@ -1,0 +1,51 @@
+flowchart LR
+  subgraph presentation[Presentation]
+    direction LR
+    browser[Operations user]
+    frontend[React + TypeScript + Vite + Tailwind]
+    nginx[Nginx frontend proxy]
+    browser --> frontend -->|HTTP / SSE| nginx
+  end
+  subgraph application[Application and security]
+    direction LR
+    api[Spring Boot REST controllers]
+    jwt[JWT authentication and ownership]
+    validation[Bean Validation]
+    service[Transaction services]
+    sse[Server-Sent Events]
+    nginx --> api
+    api --> jwt
+    api --> validation
+    api --> service
+    api --> sse
+  end
+  subgraph data[Data and messaging]
+    direction LR
+    postgres[(PostgreSQL + Spring Data JPA)]
+    redis[(Redis idempotency + rate limiting)]
+    producer[Kafka producer]
+    topic[(transaction.created)]
+    consumer[Kafka consumer]
+    retry[Retry topics]
+    dlt[Dead-letter topic]
+    service --> postgres
+    service --> redis
+    service --> producer
+    producer -->|JSON event| topic
+    topic --> consumer
+    consumer --> postgres
+    consumer --> retry
+    retry --> consumer
+    consumer --> dlt
+  end
+  subgraph operations[Infrastructure and operations]
+    direction LR
+    compose[Docker Compose]
+    caddy[Caddy HTTPS in production]
+    flyway[Flyway migrations]
+    metrics[Actuator + Prometheus]
+  end
+  caddy --> nginx
+  flyway --> postgres
+  api --> metrics
+  sse --> frontend
