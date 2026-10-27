@@ -83,7 +83,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px s
 .secondary-diagram svg .relationshipLabel,
 .secondary-diagram svg .relationshipLabelBox { fill: #202024 !important; color: #F5F1EB !important; }
 .secondary-diagram svg .attributeBoxEven,
-.secondary-diagram svg .attributeBoxOdd { fill: #25252A !important; stroke: #9C896B !important; }
+.secondary-diagram svg .attributeBoxOdd { stroke: #9C896B !important; }
 .secondary-diagram svg .edgeLabel rect,
 .secondary-diagram svg .labelBox { fill: #1B1B1E !important; }
 .secondary-diagram svg .edgeLabel text,
@@ -93,10 +93,15 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px s
 .secondary-diagram svg .actor text,
 .secondary-diagram svg .entityLabel text,
 .secondary-diagram svg .attributeBoxEven text,
+.secondary-diagram svg text.attributeBoxEven,
+.secondary-diagram svg .attributeBoxEven .attributeName,
+.secondary-diagram svg .attributeBoxEven .attributeType,
+.secondary-diagram svg .attributeBoxEven .attributeComment { fill: #F5F1EB !important; color: #F5F1EB !important; }
 .secondary-diagram svg .attributeBoxOdd text,
-.secondary-diagram svg .attributeName,
-.secondary-diagram svg .attributeType,
-.secondary-diagram svg .attributeComment { fill: #F5F1EB !important; color: #F5F1EB !important; }
+.secondary-diagram svg text.attributeBoxOdd,
+.secondary-diagram svg .attributeBoxOdd .attributeName,
+.secondary-diagram svg .attributeBoxOdd .attributeType,
+.secondary-diagram svg .attributeBoxOdd .attributeComment { fill: #111111 !important; color: #111111 !important; }
 .secondary-diagram-expanded { margin: 0; max-height: calc(100vh - 150px); min-height: 0; }
 .secondary-diagram-expanded > div { min-width: 920px; }
 .secondary-screenshot-groups { display: grid; gap: 56px; margin-top: 34px; }
@@ -130,7 +135,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px s
 .pulseops-diagram svg .relationshipLabel,
 .pulseops-diagram svg .relationshipLabelBox { fill: #202024 !important; color: #F5F1EB !important; }
 .pulseops-diagram svg .attributeBoxEven,
-.pulseops-diagram svg .attributeBoxOdd { fill: #25252A !important; stroke: #9C896B !important; }
+.pulseops-diagram svg .attributeBoxOdd { stroke: #9C896B !important; }
 .pulseops-diagram svg .edgeLabel rect,
 .pulseops-diagram svg .labelBox { fill: #1B1B1E !important; }
 .pulseops-diagram svg .edgeLabel text,
@@ -140,10 +145,15 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px s
 .pulseops-diagram svg .actor text,
 .pulseops-diagram svg .entityLabel text,
 .pulseops-diagram svg .attributeBoxEven text,
+.pulseops-diagram svg text.attributeBoxEven,
+.pulseops-diagram svg .attributeBoxEven .attributeName,
+.pulseops-diagram svg .attributeBoxEven .attributeType,
+.pulseops-diagram svg .attributeBoxEven .attributeComment { fill: #F5F1EB !important; color: #F5F1EB !important; }
 .pulseops-diagram svg .attributeBoxOdd text,
-.pulseops-diagram svg .attributeName,
-.pulseops-diagram svg .attributeType,
-.pulseops-diagram svg .attributeComment { fill: #F5F1EB !important; color: #F5F1EB !important; }
+.pulseops-diagram svg text.attributeBoxOdd,
+.pulseops-diagram svg .attributeBoxOdd .attributeName,
+.pulseops-diagram svg .attributeBoxOdd .attributeType,
+.pulseops-diagram svg .attributeBoxOdd .attributeComment { fill: #111111 !important; color: #111111 !important; }
 .pulseops-diagram-expanded { margin: 0; max-height: calc(100vh - 150px); min-height: 0; }
 .pulseops-diagram-expanded > div { min-width: 920px; }
 .pulseops-diagram-dialog { background: var(--graphite); border: 1px solid var(--border); inset: 5vh 5vw; overflow: auto; padding: 24px; position: fixed; z-index: 100; }
