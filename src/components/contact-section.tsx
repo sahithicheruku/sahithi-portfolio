@@ -44,7 +44,6 @@ export function ContactSection() {
             <Icon size={17} aria-hidden="true" />
             <span className="contact-item-label">{label}</span>
             <span className="contact-item-value">{value}</span>
-            <span className="contact-item-arrow" aria-hidden="true">↗</span>
           </a>
         ))}
       </address>

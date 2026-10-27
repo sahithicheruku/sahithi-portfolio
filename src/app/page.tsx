@@ -18,7 +18,7 @@ export default function Home() {
         <aside className="hero-rail" aria-label="Portfolio overview">
           <section><p>About me</p><span>Backend-focused engineer building reliable systems and thoughtful product experiences.</span><a href="#about">Learn more <span aria-hidden="true">↗</span></a></section>
           <section><p>My work</p><span>Explore projects across distributed systems, full-stack engineering, and AI applications.</span><a href="#projects">Browse projects <span aria-hidden="true">↗</span></a></section>
-          <section><p>Follow me</p><span>Professional links will be added when verified profiles are available.</span></section>
+          <section><p>Follow me</p><span>Connect professionally through my verified profiles.</span><div className="hero-rail-links"><a href="https://www.linkedin.com/in/sahithi-cheruku" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://github.com/sahithicheruku" target="_blank" rel="noreferrer">GitHub</a></div></section>
         </aside>
       </section>
       <AboutSection />

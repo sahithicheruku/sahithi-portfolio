@@ -41,6 +41,6 @@ export const projects: Project[] = [
     description: "A community lending platform that enables users to list items, discover shared inventory, request borrowing, and manage approvals and returns.",
     technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Tailwind CSS"],
     highlights: ["Google authentication.", "Shared inventory browsing.", "Item creation and management.", "Borrowing request workflows.", "Approval and return lifecycle.", "PostgreSQL and Prisma persistence."],
-    links: [{ label: "GitHub", href: "https://github.com/sahithicheruku/LendLoop" }],
+    links: [],
   },
 ];

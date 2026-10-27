@@ -226,3 +226,10 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px s
     font-size: 12px;
   }
 }
+
+.hero-rail-links { display: flex; flex-wrap: wrap; gap: 16px; }
+.resume-line { font-size: .78rem; }
+.skill-group h3,
+.skill-group li { color: var(--primary); }
+.skill-group:hover h3,
+.skill-group li:hover { color: var(--champagne); }

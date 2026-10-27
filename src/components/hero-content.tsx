@@ -27,6 +27,6 @@ export function HeroContent() {
       <a className="button button-primary" href="#projects">View My Work <ArrowDown size={16} aria-hidden="true" /></a>
       <a className="button button-resume" href="/resume/Sahithisri_Cheruku_Resume.docx" download="Sahithisri_Cheruku_Resume.docx"><Download size={16} aria-hidden="true" /> Download Resume</a>
     </div>
-    <div className="hero-scroll-cue" aria-hidden="true"><span /> Scroll to explore</div>
+    <div className="hero-scroll-cue" aria-hidden="true"><span /> Keep scrolling</div>
   </div>;
 }
